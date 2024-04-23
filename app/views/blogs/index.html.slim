@@ -1,0 +1,15 @@
+.max-w-full.md:max-w-7xl.mx-auto.py-4.md:py-8
+  .flex.justify-between.items-center.mb-6.flex-wrap.gap-y-4
+    .font-semibold.text-2xl.md:text-3xl.font-semibold
+      | All Blog Posts
+    .md:block.flex.flex-wrap.gap-y-4.gap-x-4
+      <!-- = link_to 'Draft Blogs', my_blogs_blogs_path, class: 'text-sky-600 hover:text-sky-700 font-semibold md:px-3 py-2 md:mr-4 inline-block' -->
+      = link_to 'New Blog', new_blog_path, class: 'text-sm rounded-3xl px-4 py-2 border-2 border-sky-600 font-semibold text-gray-600 hover:bg-sky-600 hover:text-gray-100 duration-300 inline-block'
+
+.grid.grid-cols-1.md:grid-cols-2.gap-x-8.gap-y-4.pb-6
+  - @blogs.each do |blog_post|
+    = render 'blog_post', blog_post: blog_post
+
+
+.block
+  = will_paginate @blogs

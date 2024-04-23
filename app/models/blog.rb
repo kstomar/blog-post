@@ -6,6 +6,7 @@ class Blog < ApplicationRecord
 
   scope :desc_order, -> { order(created_at: :desc) }
   scope :published, -> { where(is_draft: false) }
+  scope :draft, -> { where(is_draft: true) }
 
   self.per_page = 3
 

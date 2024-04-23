@@ -39,6 +39,10 @@ class BlogsController < ApplicationController
     end
   end
 
+  def my_blogs
+    @blog_posts = Blog.paginate(page: params[:page]).draft.desc_order
+  end
+
   def destroy
     @blog_post.destroy
 

@@ -1,7 +1,7 @@
 <div class="bg-white shadow-xl rounded-2xl px-6 pt-6 pb-8 max-w-full w-full md:max-w-[500px] md:mx-auto">
   <h1 class="text-sky-700 font-bold text-4xl border-b-2 mb-6 pb-6">LogIn</h1>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
-    <div class="mb-4">
+    <div class="my-4">
       <%= f.label :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.email_field :email, autocomplete: "email", class: "bg-white rounded-lg pl-4 py-2 md:py-3 border-b border-gray-500 focus:border-0 focus:outline-0 w-full" %>
     </div>
@@ -28,5 +28,5 @@
     <div class="border border-gray-500 h-full flex-grow"></div>
   </div>
 
-  <%= render "devise/shared/links" %>
+  <%= render "users/shared/links" %>
 </div>

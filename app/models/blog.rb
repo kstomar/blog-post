@@ -8,7 +8,7 @@ class Blog < ApplicationRecord
   scope :published, -> { where(is_draft: false) }
   scope :draft, -> { where(is_draft: true) }
 
-  self.per_page = 3
+  self.per_page = 4
 
   after_create :update_publication_at
 

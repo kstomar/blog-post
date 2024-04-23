@@ -6,5 +6,5 @@ class Comment < ApplicationRecord
 
   scope :desc_order, -> { order(created_at: :desc) }
 
-  after_create_commit { broadcast_prepend_to [blog_post, :comments], target: "#{dom_id(blog_post)}_comments" }
+  after_destroy_commit { broadcast_remove_to [blog_post, :comments], target: "#{dom_id(self)}" }
 end

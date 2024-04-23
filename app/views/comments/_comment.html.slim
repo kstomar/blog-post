@@ -16,5 +16,5 @@
             = link_to "Edit Comment", edit_blog_comment_path(blog_post, comment), class: "bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
 
 
-          = link_to "Destroy", blog_post_comment_path(blog_post, comment), data: { turbo_method: :delete }, class: "text-white hover:bg-red-700 font-semibold bg-btnDanger py-2 px-4 rounded-3xl h-11"
+          = link_to "Destroy", blog_comment_path(blog_post, comment), data: { turbo_method: :delete }, class: "text-white hover:bg-red-700 font-semibold bg-btnDanger py-2 px-4 rounded-3xl h-11"
     br

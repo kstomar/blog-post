@@ -1,0 +1,10 @@
+= form_with(model: [blog_post, comment], id: "edit_comment", local: true, data: { turbo_frame: "edit_comment" }) do |form|
+  - if comment.errors.any?
+      .mb-4.text-red-500
+        h2 = pluralize(comment.errors.count, "error") + " prohibited this blog post from being saved:"
+        ul
+          - comment.errors.full_messages.each do |message|
+            li = message
+  = render 'comments/form', form: form
+  .mb-6
+    = form.submit 'Update Comment', class: "bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"

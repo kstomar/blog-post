@@ -2,7 +2,7 @@ class BlogsController < ApplicationController
   before_action :find_blog_post, only: %i[show edit update destroy]
 
   def index
-    @blog_posts = Blog.paginate(page: params[:page]).all.desc_order
+    @blog_posts = @blog_posts = Blog.paginate(page: params[:page]).published.desc_order
   end
 
   def new

@@ -5,6 +5,7 @@ class Blog < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   scope :desc_order, -> { order(created_at: :desc) }
+  scope :published, -> { where(is_draft: false) }
 
   self.per_page = 3
 

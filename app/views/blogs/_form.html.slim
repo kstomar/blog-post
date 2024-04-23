@@ -1,0 +1,18 @@
+= turbo_frame_tag "blog_post_#{blog_post.id}"
+  = form_with model: blog_post, data: { turbo: false } do |form|
+    - if blog_post.errors.any?
+      .mb-4.text-red-500
+        h2 = pluralize(blog_post.errors.count, "error") + " prohibited this blog post from being saved:"
+        ul
+          - blog_post.errors.full_messages.each do |message|
+            li = message
+
+    .mb-4
+      = form.label :title, class: "block text-gray-700 text-sm font-bold mb-2"
+      = form.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    .mb-4
+    .mb-4.md:mb-6.flex.gap-x-2
+
+      
+    .mb-6
+      = form.submit "Publish", class: "bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"

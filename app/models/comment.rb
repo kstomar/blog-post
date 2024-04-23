@@ -1,7 +1,9 @@
 class Comment < ApplicationRecord
   include ActionView::RecordIdentifier
 
-  belongs_to :blog_post
+  validates :content, presence: true
+
+  belongs_to :blog
   belongs_to :user
 
   scope :desc_order, -> { order(created_at: :desc) }

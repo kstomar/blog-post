@@ -6,10 +6,11 @@ class Blog < ApplicationRecord
 
   scope :desc_order, -> { order(created_at: :desc) }
 
+  self.per_page = 3
+
   after_create :update_publication_at
 
 
-  self.per_page = 4
   has_rich_text :content
 
   private

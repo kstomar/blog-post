@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :find_blog_post
-  before_action :find_comment, only: %i[edit update destroy]
+  before_action :set_blog_post
+  before_action :set_comment, only: %i[edit update destroy]
 
   def create
     @comment = @blog_post.comments.build(comment_params.merge(user_id: current_user.id))
@@ -13,7 +13,10 @@ class CommentsController < ApplicationController
           locals: { current_user: current_user, comment: @comment, blog_post: @blog_post }
         )
 
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('blog_post_comment_form', partial: 'comments/new', locals: { comment: Comment.new, blog_post: @blog_post }) }
+        format.turbo_stream {
+          render turbo_stream: [turbo_stream.replace('blog_post_comment_form', partial: 'comments/new', locals: { comment: Comment.new, blog_post: @blog_post }),
+                                turbo_stream.prepend("blog_#{@blog_post.id}_comments", partial: 'comments/comment', locals: { comment: @comment, blog_post: @blog_post })]
+        }
         format.html { render partial: 'comments/form', locals: { comment: Comment.new, blog_post: @blog_post } }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('blog_post_comment_form', partial: 'comments/new', locals: { comment: @comment, blog_post: @blog_post }) }
@@ -22,15 +25,12 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @comment.update(comment_params)
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.replace("blog_post_#{@comment.id}", partial: 'comments/comment', locals: { comment: @comment, blog_post: @blog_post }) }
 
-        format.html { redirect_to blog_post_url }
+        format.html { redirect_to blog_url }
       end
     else
       render :edit
@@ -39,21 +39,20 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to blog_post_url }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("blog_post_#{@comment.id}") }
+      format.html { redirect_to blog_url }
     end
   end
 
   private
 
-  def find_comment
+  def set_comment
     @comment = @blog_post.comments.find(params[:id])
   end
 
-  def find_blog_post
-    @blog_post = BlogPost.find(params[:blog_post_id])
+  def set_blog_post
+    @blog_post = Blog.find_by(id: params[:blog_id])
   end
 
   def comment_params

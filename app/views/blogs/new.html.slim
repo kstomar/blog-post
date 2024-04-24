@@ -3,8 +3,8 @@
     .font-semibold.text-2xl.md:text-3xl.font-semibold
       | Create New Blog Post
     .md:block
-      = link_to 'My Blogs', blogs_path, class: 'text-sm rounded-lg px-4 py-2 border-2 border-sky-600 font-semibold text-gray-600 hover:bg-sky-600 hover:text-gray-100 duration-300'
+      = link_to 'My Blogs', my_blogs_blogs_path, class: 'text-sm rounded-lg px-4 py-2 border-2 border-sky-600 font-semibold text-gray-600 hover:bg-sky-600 hover:text-gray-100 duration-300'
 
   .max-w-7xl.mx-auto.bg-white.overflow-hidden.p-4.rounded
-    = render 'form', blog_post: @blog_post
+    = render 'form', blog_post: @blog
 

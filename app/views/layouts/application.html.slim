@@ -9,12 +9,13 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     = javascript_importmap_tags
   body.bg-gray-100
     - if user_signed_in?
       = render 'partials/navbar'
 
-      main.container.mx-auto.px-5.max-w-7xl.justify-center
+      main.bg-white.container.mx-auto.px-5.max-w-7xl.justify-center.pb-6
         = yield
     - else 
       main.container.mx-auto.px-5.items-center.md:max-w-7xl.max-w-full.w-full.justify-center.h-screen.flex

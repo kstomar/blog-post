@@ -4,20 +4,19 @@ class Blog < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
-  scope :desc_order, -> { order(created_at: :desc) }
+  scope :latest, -> { order(created_at: :desc) }
   scope :published, -> { where(is_draft: false) }
   scope :draft, -> { where(is_draft: true) }
 
   self.per_page = 4
 
-  after_create :update_publication_at
-
+  after_create :set_publication_at
 
   has_rich_text :content
 
   private
 
-  def update_publication_at
+  def set_publication_at
     update_column(:publication_at, DateTime.current)
   end
 end

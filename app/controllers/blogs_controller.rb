@@ -42,6 +42,10 @@ class BlogsController < ApplicationController
     @blogs = Blog.where(user_id: current_user.id).paginate(page: params[:page]).latest
   end
 
+  def draft_blogs
+    @blogs = Blog.draft.where(user_id: current_user.id).paginate(page: params[:page]).latest
+  end
+
   def destroy
     @blog.destroy
 

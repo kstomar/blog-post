@@ -1,24 +1,31 @@
-# README
+# Blogs Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Please follow the steps below for setting up project.
 
-Things you may want to cover:
+Clone the Repository.
 
-* Ruby version
+`git clone https://github.com/kstomar/blog-post`
 
-* System dependencies
 
-* Configuration
+Install all the dependencies.
 
-* Database creation
+`ruby - 3.0.0 `
 
-* Database initialization
+`rails - 7.1.3`
 
-* How to run the test suite
+Install gems.
 
-* Services (job queues, cache servers, search engines, etc.)
+`bundle install`
 
-* Deployment instructions
+Database setup.
 
-* ...
+`rails db:create `
+
+`rails db:migrate`
+
+Run server.
+
+`rails s`
+
+Vist the url on a browser to run the application.
+http://localhost:3000
